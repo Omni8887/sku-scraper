@@ -163,7 +163,14 @@ function cleanSKU(sku) {
     log(`  Novych liniek: ${newLinks.length} (spolu: ${productLinks.length})`, '🔗');
 
     const nextUrl = await page.evaluate(() => {
-      const next = document.querySelector('a[rel="next"]');
+      // VivaEshop pagination - viacero moznosti
+      const next = document.querySelector(
+        'a[rel="next"], ' +
+        '.pages-item-next a, ' +
+        'a.next, ' +
+        '[aria-label="Next"] a, ' +
+        '.action.next'
+      );
       return next ? next.href : null;
     });
 
@@ -238,9 +245,10 @@ function cleanSKU(sku) {
   lines.push(`  - z URL (zaloha): ${skuFromUrl}`);
   lines.push('='.repeat(60));
   lines.push('');
-  lines.push('ZOZNAM SKU (len kody):');
+  lines.push('ZOZNAM SKU (za sebou, ciarkou):');
   lines.push('-'.repeat(60));
-  results.forEach(r => lines.push(r.sku));
+  // Vsetky SKU na jednom riadku oddelene ciarkou
+  lines.push(results.map(r => r.sku).join(', '));
 
   lines.push('');
   lines.push('='.repeat(60));
