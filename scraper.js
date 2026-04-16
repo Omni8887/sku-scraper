@@ -108,7 +108,7 @@ function extractSKUFromURL(url) {
 function cleanSKU(sku) {
   if (!sku) return null;
   // Odstran prefix typu "HG ", "GR ", "DU " atd (2-4 pismena + medzera)
-  return sku.replace(/^[A-Z]{1,4}\s+/, '').trim();
+  return sku ? sku.trim() : null;
 }
 
 (async () => {
