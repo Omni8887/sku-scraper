@@ -1,0 +1,13 @@
+{
+  "name": "sku-scraper",
+  "version": "1.0.0",
+  "description": "SKU scraper pomocou Puppeteer",
+  "main": "scraper.js",
+  "scripts": {
+    "scrape": "node scraper.js",
+    "start": "node scraper.js"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}
