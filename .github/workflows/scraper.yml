@@ -4,18 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       url:
-        description: 'URL stránky na scrapovanie'
+        description: 'URL stranky na scrapovanie'
         required: true
         default: 'https://www.vivaeshop.cz/koupelny/sprchy?manufacturer=6400'
       output:
-        description: 'Názov výstupného súboru'
+        description: 'Nazov vystupneho suboru'
         required: false
         default: 'sku_output.txt'
-
-  schedule:
-    # Každý pondelok o 7:00 UTC (9:00 SK čas)
-    # - cron: '0 7 * * 1'
-    # (zakomentované – odkomentuj ak chceš automatické spúšťanie)
 
 jobs:
   scrape:
@@ -39,7 +34,7 @@ jobs:
       - name: Spusti scraper
         run: node scraper.js "${{ github.event.inputs.url }}" "${{ github.event.inputs.output }}"
 
-      - name: Upload výsledkov
+      - name: Upload vysledkov
         uses: actions/upload-artifact@v4
         with:
           name: sku-results
